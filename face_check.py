@@ -57,13 +57,17 @@ def detect_camera(cam_num = 0):
     cv2.destroyAllWindows()
 
 
-def detect_video(url = "https://www.youtube.com/watch?v=2fhBvH_-tNM"):
-        # imgcp.save('DC1.jpg')
-    # imgcp.show()
-    video = pafy.new(url)
-    best = video.getbest(preftype="mp4")
+def detect_video(url = "https://www.youtube.com/watch?v=2fhBvH_-tNM", is_local = False):
 
-    vid = cv2.VideoCapture(best.url)
+    
+    if(is_local):
+        vid = cv2.VideoCapture(url)
+    else:
+        video = pafy.new(url)
+        best = video.getbest(preftype="mp4")
+
+        vid = cv2.VideoCapture(best.url)
+
     
     while(True):
         
@@ -109,4 +113,4 @@ def detect_video(url = "https://www.youtube.com/watch?v=2fhBvH_-tNM"):
     cv2.destroyAllWindows()
 
 
-detect_video()
+detect_video(is_local= True, url="./videos/goals-worth-watching-again-3.mp4")
